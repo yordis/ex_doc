@@ -26,6 +26,7 @@ defmodule ExDoc.Retriever.ErlangTest do
       """)
 
       [mod] = Retriever.docs_from_modules([:mod], %ExDoc.Config{})
+      IO.inspect(mod.doc_line, label: :mod_doc_line)
 
       %ExDoc.ModuleNode{
         deprecated: nil,
@@ -46,6 +47,7 @@ defmodule ExDoc.Retriever.ErlangTest do
       } = mod
 
       assert DocAST.to_string(mod.doc) =~ "mod docs."
+      IO.inspect(function1.doc_line, label: :function1_doc_line)
 
       %ExDoc.FunctionNode{
         annotations: [],
