@@ -494,7 +494,7 @@ defmodule ExDoc.Language.Erlang do
             ref = {:type, module, name, arity}
             visibility = Refs.get_visibility(ref)
 
-            if visibility == :public do
+            if visibility in [:public, :hidden] do
               final_url(ref, config)
             else
               original_text = "#{string}/#{arity}"
