@@ -331,7 +331,7 @@ defmodule ExDoc.Language.Erlang do
   defp do_url(ref, original_text, config) do
     visibility = Refs.get_visibility(ref)
 
-    if visibility == :public do
+    if visibility == :public or elem(ref, 0) == :type do
       final_url(ref, config)
     else
       Autolink.maybe_warn(ref, config, visibility, %{original_text: original_text})
@@ -486,7 +486,7 @@ defmodule ExDoc.Language.Erlang do
           {name, arity} ->
             visibility = Refs.get_visibility({:type, config.current_module, name, arity})
 
-            if visibility == :public do
+            if visibility in [:public, :hidden] do
               final_url({:type, name, arity}, config)
             end
 

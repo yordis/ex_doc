@@ -32,6 +32,14 @@ defmodule ExDoc.Language.ErlangTest do
                ~s|<a href="https://hexdocs.pm/earmark_parser/EarmarkParser.html"><code>'Elixir.EarmarkParser'</code></a>|
     end
 
+    test "module with anchor" do
+      ast =
+        {:a, [href: "bar#foo", rel: "https://erlang.org/doc/link/seeerl"],
+         [{:code, [], ["bar#anchor"], %{}}], %{}}
+
+      assert do_autolink_doc(ast) == ~s|<a href="bar.html#anchor"><code>bar</code></a>|
+    end
+
     test "custom text", c do
       assert autolink_doc("{@link array. The <code>array</code> module}", c) ==
                ~s|<a href="https://erlang.org/doc/man/array.html">The <code>array</code> module</a>|
@@ -254,6 +262,11 @@ defmodule ExDoc.Language.ErlangTest do
 
     doc
     |> ExDoc.DocAST.parse!("application/erlang+html")
+    |> do_autolink_doc(opts)
+  end
+
+  defp do_autolink_doc(doc, opts \\ []) do
+    doc
     |> ExDoc.Language.Erlang.autolink_doc(opts)
     |> ExDoc.DocAST.to_string()
   end
