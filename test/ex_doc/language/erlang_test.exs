@@ -34,10 +34,18 @@ defmodule ExDoc.Language.ErlangTest do
 
     test "module with anchor" do
       ast =
-        {:a, [href: "bar#foo", rel: "https://erlang.org/doc/link/seeerl"],
-         [{:code, [], ["bar#anchor"], %{}}], %{}}
+        {:a, [href: "array#anchor", rel: "https://erlang.org/doc/link/seeerl"],
+         [{:code, [], ["array"], %{}}], %{}}
 
-      assert do_autolink_doc(ast) == ~s|<a href="bar.html#anchor"><code>bar</code></a>|
+      assert do_autolink_doc(ast) ==
+               ~s|<a href="https://erlang.org/doc/man/array.html#anchor"><code>array</code></a>|
+
+      ast =
+        {:a, [href: "stdlib:array#anchor", rel: "https://erlang.org/doc/link/seeerl"],
+         [{:code, [], ["array"], %{}}], %{}}
+
+      assert do_autolink_doc(ast) ==
+               ~s|<a href="https://erlang.org/doc/man/array.html#anchor"><code>array</code></a>|
     end
 
     test "custom text", c do
