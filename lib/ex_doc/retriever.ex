@@ -30,6 +30,7 @@ defmodule ExDoc.Retriever do
   def docs_from_files(files, config) when is_list(files) do
     files
     |> Enum.map(&filename_to_module(&1))
+    |> Enum.filter(&(&1 == :application))
     |> docs_from_modules(config)
   end
 

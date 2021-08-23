@@ -249,8 +249,8 @@ defmodule ExDoc.Language.Erlang do
             autolink(:type, type, "", inner, config)
         end
 
-      "https://erlang.org/doc/link/seeapp" ->
-        warn_ref(attrs[:href], config)
+      "https://erlang.org/doc/link/" <> see ->
+        warn_ref(attrs[:href] <> " (#{see})", config)
         inner
 
       _ ->
