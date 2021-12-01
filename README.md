@@ -30,19 +30,20 @@ ExDoc ships with many features:
 
 ## Using ExDoc with Mix
 
-To use ExDoc in your Mix projects, first add ExDoc as a dependency.
+To use ExDoc in your Mix projects, first add  `:ex_doc` as a dependency by modifiying your 
+your list of dependencies in `mix.exs`.
 
-If you are using Elixir v1.10, or later:
+If you are using Elixir v1.10 or later:
 
 ```elixir
 def deps do
   [
-    {:ex_doc, "~> 0.24", only: :dev, runtime: false},
+    {:ex_doc, "~> 0.26", only: :dev, runtime: false},
   ]
 end
 ```
 
-> NOte: if you are using Elixir v1.7, v1.8, or v1.9, use `~> 0.22.0`.
+And if you are using Elixir v1.7, v1.8, or v1.9, use version requirement `"~> 0.22.0"` instead.
 
 After adding ExDoc as a dependency, run `mix deps.get` to install it.
 
